@@ -16,16 +16,37 @@ public class CategoryService {
     }
 
     public Category addCategory(User user, String name, double budgetLimit) {
-        if (user.getTotalSpent() + budgetLimit > user.getSalary()) {
-            throw new RuntimeException("Category exceeds salary limit");
+        double currentCategoryBudgetSum = user.getCategories().stream()
+                .mapToDouble(Category::getBudgetLimit).sum();
+
+        if (currentCategoryBudgetSum + budgetLimit > user.getSalary()) {
+            throw new IllegalArgumentException("Total category budget exceeds your salary.");
         }
+
         Category category = new Category();
         category.setName(name);
         category.setBudgetLimit(budgetLimit);
+        category.setSpent(0.0);
         category.setUser(user);
-        user.setTotalSpent(user.getTotalSpent() + budgetLimit);
+
+        return categoryRepo.save(category);
+    }
+    public Category spendCategory(User user, Long categoryId, double amount) {
+        Category category = categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        if (category.getSpent() + amount > category.getBudgetLimit()) {
+            throw new RuntimeException("Insufficient category budget");
+        }
+
+        if (user.getTotalSpent() + amount > user.getSalary()) {
+            throw new RuntimeException("Insufficient total balance");
+        }
+        category.setSpent(category.getSpent() + amount);
+        user.setTotalSpent(user.getTotalSpent() + amount);
         userRepo.save(user);
         return categoryRepo.save(category);
     }
+
 
 }

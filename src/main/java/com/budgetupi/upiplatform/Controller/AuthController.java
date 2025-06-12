@@ -1,12 +1,18 @@
 package com.budgetupi.upiplatform.Controller;
 
+import com.budgetupi.upiplatform.Dto.CategoryDto;
 import com.budgetupi.upiplatform.Dto.Login;
 import com.budgetupi.upiplatform.Dto.UserDto;
+import com.budgetupi.upiplatform.Dto.UserProfileDto;
 import com.budgetupi.upiplatform.Model.User;
 import com.budgetupi.upiplatform.Service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -42,9 +48,20 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<User> getMe() {
+    public ResponseEntity<?> getMe() {
         User user = userService.getLoggedInUser();
-        return ResponseEntity.ok(user);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No user is logged in");
+        }
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        if (user.getCategories() != null) {
+            categoryDtos = user.getCategories().stream()
+                    .map(cat -> new CategoryDto(cat.getName(), cat.getBudgetLimit(), cat.getSpent()))
+                    .collect(Collectors.toList());
+        }
+        UserProfileDto dto = new UserProfileDto( user.getName(), user.getUpiId(), user.getSalary(), categoryDtos);
+        return ResponseEntity.ok(dto);
     }
+
 
 }

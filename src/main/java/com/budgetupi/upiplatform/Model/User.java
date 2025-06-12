@@ -20,7 +20,7 @@ public class User {
     private double salary;
     private double totalSpent=0;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Category> categories;
 
     public long getId() {

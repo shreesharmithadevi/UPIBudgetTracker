@@ -5,40 +5,18 @@ import jakarta.persistence.*;
 
 @Entity
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private double budgetLimit;
-    private double spent = 0;
+    private double spent;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getBudgetLimit() {
-        return budgetLimit;
-    }
-
-    public void setBudgetLimit(double budgetLimit) {
-        this.budgetLimit = budgetLimit;
-    }
-
-    public double getSpent() {
-        return spent;
-    }
-
-    public void setSpent(double spent) {
-        this.spent = spent;
-    }
 
     public User getUser() {
         return user;
@@ -48,7 +26,27 @@ public class Category {
         this.user = user;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public double getBudgetLimit() {
+        return budgetLimit;
+    }
+    public double getSpent() {
+        return spent;
+    }
+    public void setSpent(double spent) {
+        this.spent = spent;
+    }
+
+    public void setName(String name) {
+        this.name=name;
+    }
+
+    public void setBudgetLimit(double budgetLimit) {
+        this.budgetLimit=budgetLimit;
     }
 }

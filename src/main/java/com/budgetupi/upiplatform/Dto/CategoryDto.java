@@ -1,8 +1,15 @@
 package com.budgetupi.upiplatform.Dto;
 
 public class CategoryDto {
+    private double spent;
     public String name;
     public double budgetLimit;
+
+    public CategoryDto(String name, double budgetLimit, double spent) {
+        this.name = name;
+        this.budgetLimit = budgetLimit;
+        this.spent = spent;
+    }
     public String getName() {
         return name;
     }
@@ -15,7 +22,16 @@ public class CategoryDto {
         return budgetLimit;
     }
 
+    public double getSpent() {
+        return spent;
+    }
+    public void setSpent(double spent){
+        this.spent=spent;
+    }
+
     public void setBudgetLimit(double budgetLimit) {
         this.budgetLimit = budgetLimit;
     }
+
+
 }
