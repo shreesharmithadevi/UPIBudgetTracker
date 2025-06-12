@@ -13,7 +13,6 @@ public class UserProfileDto {
         this.salary = salary;
         this.categories = categories;
     }
-
     private List<CategoryDto> categories;
 
     public String getName() {
@@ -24,28 +23,5 @@ public class UserProfileDto {
         this.name = name;
     }
 
-    public String getUpiId() {
-        return upiId;
-    }
-
-    public void setUpiId(String upiId) {
-        this.upiId = upiId;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public List<CategoryDto> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<CategoryDto> categories) {
-        this.categories = categories;
-    }
 }
 

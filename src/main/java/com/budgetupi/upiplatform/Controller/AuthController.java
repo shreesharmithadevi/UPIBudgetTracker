@@ -31,10 +31,10 @@ public class AuthController {
         user.setPhone(dto.getPhone());
         user.setBankname(dto.getBankName());
         user.setPassword(dto.getPassword());
-        user.setConfrimpassword(dto.getConfrimpassword());
+        user.setConfirmpassword(dto.getConfirmpassword());
         user.setPin(dto.getPin());
         user.setSalary(dto.getSalary());
-        return ResponseEntity.ok(userService.registeredUser(user));
+        return ResponseEntity.ok(userService.registerUser(user));
     }
 
     @PostMapping("/login")
@@ -62,6 +62,4 @@ public class AuthController {
         UserProfileDto dto = new UserProfileDto( user.getName(), user.getUpiId(), user.getSalary(), categoryDtos);
         return ResponseEntity.ok(dto);
     }
-
-
 }

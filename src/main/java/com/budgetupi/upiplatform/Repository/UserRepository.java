@@ -9,6 +9,5 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long> {
     @EntityGraph(attributePaths = "categories")
     Optional<User> findByUpiId(String upiId);
-
     Optional<User> findByPhone(String phone);
 }

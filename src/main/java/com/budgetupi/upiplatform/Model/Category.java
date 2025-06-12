@@ -1,6 +1,6 @@
 package com.budgetupi.upiplatform.Model;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,7 +16,14 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
+
+    public Category(String name, double budgetLimit, User user) {
+        this.name=name;
+        this.budgetLimit=budgetLimit;
+        this.user=user;
+    }
 
     public User getUser() {
         return user;

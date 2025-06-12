@@ -21,17 +21,4 @@ public class CategoryDto {
     public double getBudgetLimit() {
         return budgetLimit;
     }
-
-    public double getSpent() {
-        return spent;
-    }
-    public void setSpent(double spent){
-        this.spent=spent;
-    }
-
-    public void setBudgetLimit(double budgetLimit) {
-        this.budgetLimit = budgetLimit;
-    }
-
-
 }

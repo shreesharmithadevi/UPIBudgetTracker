@@ -1,5 +1,6 @@
 package com.budgetupi.upiplatform.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,14 +15,16 @@ public class User {
     private int age;
     private String bankname;
     private String password;
-    private String confrimpassword;
+    private String confirmpassword;
     private String pin;
     private String upiId;
     private double salary;
     private double totalSpent=0;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Category> categories;
+
 
     public long getId() {
         return id;
@@ -59,12 +62,12 @@ public class User {
         this.password = password;
     }
 
-    public String getConfrimpassword() {
-        return confrimpassword ;
+    public String getConfirmpassword() {
+        return confirmpassword ;
     }
 
-    public void setConfrimpassword(String confrimpassword) {
-        this.confrimpassword=confrimpassword;
+    public void setConfirmpassword(String confirmpassword) {
+        this.confirmpassword=confirmpassword;
     }
 
 
